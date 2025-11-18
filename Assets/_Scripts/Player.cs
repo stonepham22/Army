@@ -20,6 +20,11 @@ public class Player : MonoBehaviour
         PlayAnimation();
     }
 
+    void Update()
+    {
+        Jump();
+    }
+
     void GetInput()
     {
         _input = Input.GetAxis("Horizontal");
@@ -35,6 +40,14 @@ public class Player : MonoBehaviour
     void PlayAnimation()
     {
         _animator.Play(_input != 0 ? "Walk" : "Idle");
+    }
+
+    void Jump()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            _rigidbody.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
+        }
     }
 
 }
