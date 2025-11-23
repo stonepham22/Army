@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Ground : MonoBehaviour
 {
-    [SerializeField] private float _distance = 4f;
+    [SerializeField] private float _distance = 2f;
     
     void FixedUpdate()
     {

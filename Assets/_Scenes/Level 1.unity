@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c16c9d0cbe040d4997fba8f5c78c728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distance: 4
+  _distance: 2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +443,7 @@ Transform:
   m_GameObject: {fileID: 792296950}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.43, y: -4.59, z: 0}
+  m_LocalPosition: {x: 5.5, y: -4.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 909396444}
   - component: {fileID: 909396447}
   - component: {fileID: 909396448}
-  - component: {fileID: 909396445}
+  - component: {fileID: 909396449}
   - component: {fileID: 909396446}
   m_Layer: 0
   m_Name: Enemy
@@ -637,7 +637,7 @@ Transform:
   m_GameObject: {fileID: 909396441}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15696493, y: -3.37, z: 0}
+  m_LocalPosition: {x: -0.15696493, y: -5.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -720,19 +720,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &909396445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 909396441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4755aaabccba60749a114862fc1d76dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 792296950}
 --- !u!114 &909396446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,10 +732,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 352ce0ecde67189448c6f5a634d05fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 792296951}
+  _player: {fileID: 792296951}
   chaseDistance: 5
   stopChaseDistance: 8
+  isChasing: 0
+  _enemyDamage: {fileID: 909396449}
   moveSpeed: 3
+  originalPosition: 0
+  _rb: {fileID: 909396447}
+  _lastPosition: {x: 0, y: 0}
+  _anim: {fileID: 909396443}
 --- !u!50 &909396447
 Rigidbody2D:
   serializedVersion: 5
@@ -775,7 +768,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!70 &909396448
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -806,13 +799,30 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.3125, y: 2.25}
   m_Direction: 0
+--- !u!114 &909396449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909396441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c9af5bd5f4509646b0b553d10542f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 10
+  _damageInterval: 1
+  _playerHealth: {fileID: 0}
+  _isDamaging: 0
+  _enemyGuard2D: {fileID: 909396446}
 --- !u!1 &1599929685
 GameObject:
   m_ObjectHideFlags: 0
