@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 792296956}
   - component: {fileID: 792296955}
   - component: {fileID: 792296954}
+  - component: {fileID: 792296957}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -606,6 +607,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &792296957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792296950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502e8caf97ef80c409d869b24ac5f534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &909396441
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,8 +632,11 @@ GameObject:
   - component: {fileID: 909396444}
   - component: {fileID: 909396447}
   - component: {fileID: 909396448}
+  - component: {fileID: 909396451}
   - component: {fileID: 909396449}
   - component: {fileID: 909396446}
+  - component: {fileID: 909396450}
+  - component: {fileID: 909396452}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -732,16 +748,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 352ce0ecde67189448c6f5a634d05fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 792296951}
+  _enemyController: {fileID: 909396451}
   chaseDistance: 5
   stopChaseDistance: 8
   isChasing: 0
-  _enemyDamage: {fileID: 909396449}
-  moveSpeed: 3
-  originalPosition: 0
-  _rb: {fileID: 909396447}
-  _lastPosition: {x: 0, y: 0}
-  _anim: {fileID: 909396443}
 --- !u!50 &909396447
 Rigidbody2D:
   serializedVersion: 5
@@ -820,9 +830,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 10
   _damageInterval: 1
-  _playerHealth: {fileID: 0}
   _isDamaging: 0
-  _enemyGuard2D: {fileID: 909396446}
+--- !u!114 &909396450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909396441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5cfff858c40ad04491b21bbbd5c3c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyController: {fileID: 909396451}
+  _lastPosition: {x: 0, y: 0}
+  _isMoving: 0
+--- !u!114 &909396451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909396441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d91cfa713e095540a1ce1269a26ed08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 792296951}
+  _rigidbody2D: {fileID: 909396447}
+  _animator: {fileID: 909396443}
+  _enemyChasePlayer: {fileID: 909396446}
+  _enemyDamage: {fileID: 909396449}
+  _enemyAnimation: {fileID: 909396450}
+  _enemyMovement: {fileID: 909396452}
+--- !u!114 &909396452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909396441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad6903262bf57a846930d39071c2c902, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyController: {fileID: 909396451}
+  moveSpeed: 3
+  _lastPosition: {x: 0, y: 0}
+  _originalPosition: 0
 --- !u!1 &1599929685
 GameObject:
   m_ObjectHideFlags: 0

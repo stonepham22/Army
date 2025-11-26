@@ -1,34 +1,26 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyGuard2D))]
+[RequireComponent(typeof(EnemyChasePlayer))]
 public class EnemyDamage : MonoBehaviour
 {
     [SerializeField] private int _damage = 10;
     [SerializeField] private float _damageInterval = 1f;
-    [SerializeField] private DamageReceiver _playerHealth;
+    [SerializeField] private IDamageReceiver _playerDamage;
     [SerializeField] private bool _isDamaging = false;
     public bool IsDamaging => _isDamaging;
-    [SerializeField] private EnemyGuard2D _enemyGuard2D;
-
-    void Reset()
-    {
-        _enemyGuard2D = GetComponent<EnemyGuard2D>();
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Enemy chạm vào Player");
-            _isDamaging = true;
-            _enemyGuard2D.Stop();
-            // _playerHealth = collision.GetComponent<DamageReceiver>();
+            _playerDamage = collision.GetComponent<IDamageReceiver>();
 
-            // if (_playerHealth != null && !_isDamaging)
-            // {
-            //     _isDamaging = true;
-            //     InvokeRepeating(nameof(DealDamage), 0f, _damageInterval);  // bắt đầu gây damage mỗi giây
-            // }
+            if (_playerDamage != null && !_isDamaging)
+            {
+                Debug.Log("Bắt đầu gây  damage cho Player");
+                _isDamaging = true;
+                InvokeRepeating(nameof(DealDamage), 0f, _damageInterval);  // bắt đầu gây damage mỗi giây
+            }
         }
     }
 
@@ -36,7 +28,6 @@ public class EnemyDamage : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Enemy rời khỏi Player");
             _isDamaging = false;
             // StopDamage();
         }
@@ -44,9 +35,9 @@ public class EnemyDamage : MonoBehaviour
 
     void DealDamage()
     {
-        if (_playerHealth != null)
+        if (_playerDamage != null)
         {
-            _playerHealth.ReceiveDamage(_damage);
+            _playerDamage.ReceiveDamage(_damage);
             Debug.Log("Enemy gây damage!");
         }
         else
