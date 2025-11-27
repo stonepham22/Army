@@ -17,7 +17,6 @@ public class EnemyDamage : MonoBehaviour
 
             if (_playerDamage != null && !_isDamaging)
             {
-                Debug.Log("Bắt đầu gây  damage cho Player");
                 _isDamaging = true;
                 InvokeRepeating(nameof(DealDamage), 0f, _damageInterval);  // bắt đầu gây damage mỗi giây
             }
@@ -38,7 +37,6 @@ public class EnemyDamage : MonoBehaviour
         if (_playerDamage != null)
         {
             _playerDamage.ReceiveDamage(_damage);
-            Debug.Log("Enemy gây damage!");
         }
         else
         {
