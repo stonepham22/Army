@@ -1,7 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-public class PlayerShooter : MonoBehaviour
+public class SupporterShootEnemy : MonoBehaviour
 {
     [SerializeField] private float shootRange = 10f;
     [SerializeField] private float shootInterval = 0.4f;
