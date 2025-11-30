@@ -71,6 +71,14 @@ public class PlayerShooter : MonoBehaviour
 
     private void Shoot(Vector2 enemyDirection)
     {
+        if(enemyDirection == Vector2.left)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if(enemyDirection == Vector2.right)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
         GameObject bullet = Instantiate(bulletPrefab, transform.position, quaternion.identity);
         bullet.GetComponent<Bullet>().direction = enemyDirection;
     }
