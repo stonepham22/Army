@@ -10,4 +10,14 @@ public class Bullet : MonoBehaviour
     {
         transform.Translate(direction * speed * Time.deltaTime);
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Xử lý va chạm với enemy hoặc các đối tượng khác
+        if (collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<IDamageReceiver>()?.ReceiveDamage(20);
+            Destroy(gameObject); // Hủy bullet sau khi va chạm        
+        }
+    }
 }
