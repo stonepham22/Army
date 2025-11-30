@@ -5,7 +5,9 @@ using UnityEngine.UI;
 public class PlayerPickUpItems : MonoBehaviour
 {
     [SerializeField] private int _gold = 0;
+    public int Gold => _gold;
     [SerializeField] private int _iron = 0;
+    public int Iron => _iron;
 
     [SerializeField] private Text _goldText;
     [SerializeField] private Text _ironText;
