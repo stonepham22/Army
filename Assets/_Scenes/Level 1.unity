@@ -814,6 +814,7 @@ GameObject:
   - component: {fileID: 734166499}
   - component: {fileID: 734166500}
   - component: {fileID: 734166502}
+  - component: {fileID: 734166503}
   m_Layer: 0
   m_Name: Supporter
   m_TagString: Untagged
@@ -1015,6 +1016,21 @@ MonoBehaviour:
   _goldText: {fileID: 1736302864}
   _ironText: {fileID: 1437838593}
   _supporterFollowPlayer: {fileID: 734166499}
+--- !u!114 &734166503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734166495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2e38112f1f91e489748178c691a50c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lastPosition: {x: 0, y: 0}
+  _isMoving: 0
+  _animator: {fileID: 734166496}
 --- !u!1 &792296950
 GameObject:
   m_ObjectHideFlags: 0
