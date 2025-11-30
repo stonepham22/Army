@@ -1,13 +1,16 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyChasePlayer))]
-public class EnemyDamage : MonoBehaviour
+public class EnemyDamage : MonoBehaviour, IDamageReceiver
 {
+    [Header("DealDamage")]
     [SerializeField] private int _damage = 10;
     [SerializeField] private float _damageInterval = 1f;
     [SerializeField] private IDamageReceiver _playerDamage;
     [SerializeField] private bool _isDamaging = false;
     public bool IsDamaging => _isDamaging;
+
+    [Header("ReceiveDamage")]
+    [SerializeField] private int _health = 100;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -21,6 +24,7 @@ public class EnemyDamage : MonoBehaviour
                 InvokeRepeating(nameof(DealDamage), 0f, _damageInterval);  // bắt đầu gây damage mỗi giây
             }
         }
+    
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -49,5 +53,14 @@ public class EnemyDamage : MonoBehaviour
     {
         _isDamaging = false;
         CancelInvoke("DealDamage");
+    }
+
+    public void ReceiveDamage(int damage)
+    {
+        this._health -= damage;
+        if (this._health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
