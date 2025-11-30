@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerShooter : MonoBehaviour
@@ -5,27 +6,24 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private float shootRange = 10f;
     [SerializeField] private float shootInterval = 0.4f;
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform shootPoint;
     [SerializeField] private LayerMask enemyLayer;
-
-    private float shootTimer;
+    [SerializeField] private float shootTimer;
+    [SerializeField] private Transform _player;
 
     private void FixedUpdate()
     {
-        Transform enemy = RaycastFindEnemy();
-
-        if (enemy != null)
+        Vector2 enemy = RaycastFindEnemy();
+        if (enemy!= Vector2.zero)
         {
             TryShoot(enemy);
         }
     }
 
-    private Transform RaycastFindEnemy()
+    private Vector2 RaycastFindEnemy()
     {
         // Raycast sang phải
-        shootPoint = transform; // Đảm bảo shootPoint được gán đúng
         RaycastHit2D rightHit = Physics2D.Raycast(
-            shootPoint.position,
+            _player.position,
             Vector2.right,
             shootRange,
             enemyLayer
@@ -33,7 +31,7 @@ public class PlayerShooter : MonoBehaviour
 
         // Raycast sang trái
         RaycastHit2D leftHit = Physics2D.Raycast(
-            shootPoint.position,
+            _player.position,
             Vector2.left,
             shootRange,
             enemyLayer
@@ -42,25 +40,25 @@ public class PlayerShooter : MonoBehaviour
         // Nếu cả hai đều thấy enemy → chọn enemy gần nhất
         if (rightHit.collider != null && leftHit.collider != null)
         {
-            float rightDist = Vector2.Distance(shootPoint.position, rightHit.point);
-            float leftDist  = Vector2.Distance(shootPoint.position, leftHit.point);
+            float rightDist = Vector2.Distance(_player.position, rightHit.point);
+            float leftDist  = Vector2.Distance(_player.position, leftHit.point);
 
-            return rightDist < leftDist ? rightHit.collider.transform : leftHit.collider.transform;
+            return rightDist < leftDist ? Vector2.right : Vector2.left;
         }
 
         // Nếu chỉ thấy bên phải
         if (rightHit.collider != null)
-            return rightHit.collider.transform;
+            return Vector2.right;
 
         // Nếu chỉ thấy bên trái
         if (leftHit.collider != null)
-            return leftHit.collider.transform;
+            return Vector2.left;
 
         // Không có enemy
-        return null;
+        return Vector2.zero;
     }
 
-    private void TryShoot(Transform enemy)
+    private void TryShoot(Vector2 enemy)
     {
         shootTimer -= Time.deltaTime;
 
@@ -71,13 +69,9 @@ public class PlayerShooter : MonoBehaviour
         }
     }
 
-    private void Shoot(Transform enemy)
+    private void Shoot(Vector2 enemyDirection)
     {
-        Debug.Log("Shooting at enemy: " + enemy.name);
-
-        // Tự xác định hướng viên đạn
-        // Vector3 dir = enemy.position - shootPoint.position;
-        // Quaternion rot = Quaternion.LookRotation(Vector3.forward, dir);
-        // Instantiate(bulletPrefab, shootPoint.position, rot);
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, quaternion.identity);
+        bullet.GetComponent<Bullet>().direction = enemyDirection;
     }
 }

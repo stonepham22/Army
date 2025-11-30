@@ -921,7 +921,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734166495}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37af2c6a4e0f87b4cbdc146944519f6f, type: 3}
   m_Name: 
@@ -943,11 +943,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootRange: 10
   shootInterval: 0.4
-  bulletPrefab: {fileID: 0}
-  shootPoint: {fileID: 0}
+  bulletPrefab: {fileID: 970374660}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
+  shootTimer: 0
+  _player: {fileID: 792296951}
 --- !u!1 &792296950
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,8 +1573,9 @@ GameObject:
   m_Component:
   - component: {fileID: 970374661}
   - component: {fileID: 970374662}
+  - component: {fileID: 970374663}
   m_Layer: 0
-  m_Name: bullet
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1588,7 +1590,7 @@ Transform:
   m_GameObject: {fileID: 970374660}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.82, y: 0, z: 0}
+  m_LocalPosition: {x: 0.966, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1649,6 +1651,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &970374663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970374660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26c8a0d6760a661468352172fa891e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!1 &1167415739
 GameObject:
   m_ObjectHideFlags: 0
