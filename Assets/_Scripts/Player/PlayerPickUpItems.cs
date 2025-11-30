@@ -23,7 +23,18 @@ public class PlayerPickUpItems : MonoBehaviour
         if (other.CompareTag("Item")) {
             AddItem(other.gameObject);
             Destroy(other.gameObject);
-            // poolingg object
+        }
+
+        if(other.CompareTag("Supporter")) {
+            SupporterInteractPlayer supporter = other.GetComponent<SupporterInteractPlayer>();
+            if (supporter != null) {
+                if(_gold >= supporter.Gold && _iron >= supporter.Iron) {
+                    _gold -= supporter.Gold;
+                    _iron -= supporter.Iron;
+                    _goldText.text = "Gold: " + _gold.ToString();
+                    _ironText.text = "Iron: " + _iron.ToString();
+                }
+            }
         }
 
     }
