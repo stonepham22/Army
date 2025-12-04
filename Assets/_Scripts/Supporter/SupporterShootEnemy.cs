@@ -9,6 +9,8 @@ public class SupporterShootEnemy : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float shootTimer;
     [SerializeField] private Transform _player;
+    [SerializeField] private bool _isShooting;
+    public bool IsShooting => _isShooting;
 
     private void FixedUpdate()
     {
@@ -22,6 +24,8 @@ public class SupporterShootEnemy : MonoBehaviour
     private Vector2 RaycastFindEnemy()
     {
         // Raycast sang phải
+        _isShooting = true;
+        
         RaycastHit2D rightHit = Physics2D.Raycast(
             _player.position,
             Vector2.right,
@@ -54,6 +58,7 @@ public class SupporterShootEnemy : MonoBehaviour
         if (leftHit.collider != null)
             return Vector2.left;
 
+        _isShooting = false;
         // Không có enemy
         return Vector2.zero;
     }
@@ -66,7 +71,10 @@ public class SupporterShootEnemy : MonoBehaviour
         {
             Shoot(enemy);
             shootTimer = shootInterval;
+            _isShooting = true;
         }
+
+        _isShooting = false;
     }
 
     private void Shoot(Vector2 enemyDirection)
@@ -80,6 +88,6 @@ public class SupporterShootEnemy : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
         GameObject bullet = Instantiate(bulletPrefab, transform.position, quaternion.identity);
-        bullet.GetComponent<Bullet>().direction = enemyDirection;
+        bullet.GetComponent<BulletSupporter>().direction = enemyDirection;
     }
 }
