@@ -20,7 +20,6 @@ public class PlayerDamage : MonoBehaviour, IDamageReceiver
             Debug.Log("Player đã chết!");
             gameOverScreen.SetActive(true);
             gameObject.SetActive(false);
-            Time.timeScale = 0f;
         }
         HpText.text = "HP: " + _health.ToString();
     }

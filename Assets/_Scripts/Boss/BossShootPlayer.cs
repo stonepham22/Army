@@ -7,6 +7,8 @@ public class BossShootPlayer : MonoBehaviour
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private LayerMask _playerLayer;
     [SerializeField] private float _shootTimer;
+    [SerializeField] private CountdownText _countdownText;
+    [SerializeField] private bool _isCountingDown = false;
     
     void FixedUpdate()
     {
@@ -27,6 +29,11 @@ public class BossShootPlayer : MonoBehaviour
 
         if(raycastHit2D.collider == null) return false; 
         
+        if(!_isCountingDown)
+        {
+            _countdownText.StartCountdown();
+            _isCountingDown = true;
+        }
 
         return true; // Placeholder
     }
