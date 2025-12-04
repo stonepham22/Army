@@ -25,18 +25,22 @@ public class BossShootPlayer : MonoBehaviour
             _playerLayer // Assuming the player is on the "Player" layer
         );
 
-        if(raycastHit2D.collider != null)
-        {
-            Debug.Log("Player detected by boss!");
-            return true;
-        }
+        if(raycastHit2D.collider == null) return false; 
+        
 
-        return false; // Placeholder
+        return true; // Placeholder
     }
 
     void ShootAtPlayer()
     {
-        Debug.Log("Boss shoots at player!");
+        _shootTimer += Time.fixedDeltaTime;
+
+        if (_shootTimer <= _shootInterval) return;
+        
+        GameObject bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+        bullet.GetComponent<Bullet>().direction = Vector2.left; // Assuming the boss shoots to the left; adjust as needed
+        _shootTimer = 0f;
+
     }
 
 }
