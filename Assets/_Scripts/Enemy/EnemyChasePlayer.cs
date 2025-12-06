@@ -22,6 +22,12 @@ public class EnemyChasePlayer : BaseEnemy
         
         if(Controller.Damage.IsDamaging) return;
 
+        if(Container.PlayerInside)
+        {
+            isChasing = false;
+            return;
+        }
+
         float distToPlayer = Vector3.Distance(transform.position, Controller.Player.position);
 
         if (!isChasing && distToPlayer <= chaseDistance)
