@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class GameOverScreen : MonoBehaviour
 {
-    
-    public void Setup(int score)
+
+    void OnEnable()
     {
-        gameObject.SetActive(true);
+        Time.timeScale = 0f;
     }
 }

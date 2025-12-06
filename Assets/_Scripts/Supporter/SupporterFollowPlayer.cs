@@ -5,6 +5,15 @@ public class SupporterFollowPlayer : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private float followDistance = 2f;
     [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private SupporterShootEnemy _shootEnemy;
+
+    void Awake()
+    {
+        if (_shootEnemy == null)
+        {
+            _shootEnemy = GetComponent<SupporterShootEnemy>();
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -33,6 +42,9 @@ public class SupporterFollowPlayer : MonoBehaviour
     {
         // nếu player ở bên phải -> flip phải
         // nếu player ở bên trái -> flip trái
+        
+        if (_shootEnemy.IsShooting) return;
+
         float dirToPlayer = Mathf.Sign(player.position.x - transform.position.x);
 
         transform.localScale = new Vector3(dirToPlayer, 1, 1);
