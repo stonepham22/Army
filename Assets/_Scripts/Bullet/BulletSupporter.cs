@@ -14,6 +14,7 @@ public class BulletSupporter : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player")) return;
+        Debug.Log("Bullet hit: " + collision.name);
         collision.GetComponent<IDamageReceiver>()?.ReceiveDamage(_damage);
         Destroy(gameObject); // Hủy bullet sau khi va chạm      
     }

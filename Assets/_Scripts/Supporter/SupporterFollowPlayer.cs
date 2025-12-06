@@ -45,8 +45,6 @@ public class SupporterFollowPlayer : MonoBehaviour
         
         if (_shootEnemy.IsShooting) return;
 
-        Debug.Log("Flipping");
-
         float dirToPlayer = Mathf.Sign(player.position.x - transform.position.x);
 
         transform.localScale = new Vector3(dirToPlayer, 1, 1);
